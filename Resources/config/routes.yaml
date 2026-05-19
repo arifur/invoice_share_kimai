@@ -1,0 +1,3 @@
+invoice_share_routes:
+    resource: '@InvoiceShareBundle/Controller/'
+    type: attribute

@@ -1,0 +1,34 @@
+{
+    "name": "kimai-plugin/invoice-share",
+    "description": "Generate unique UUID links for invoices",
+    "type": "kimai-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "kimai",
+        "kimai-plugin",
+        "invoice",
+        "uuid"
+    ],
+    "license": "MIT",
+    "extra": {
+        "kimai": {
+            "require": 22500,
+            "name": "Invoice Share"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "KimaiPlugin\\InvoiceShareBundle\\": ""
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": false,
+            "symfony/runtime": false
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    }
+}

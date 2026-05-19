@@ -1,0 +1,13 @@
+# --------------------------------------------------------------------------------------------------
+# Generate a new migration with:
+# bin/console doctrine:migrations:diff --em=default --configuration=var/plugins/InvoiceShareBundle/Migrations/doctrine_migrations.yaml
+#
+# Execute all migrations with:
+# bin/console doctrine:migrations:migrate --em=default --configuration=var/plugins/InvoiceShareBundle/Migrations/doctrine_migrations.yaml
+# --------------------------------------------------------------------------------------------------
+
+table_storage:
+  table_name: 'bundle_migration_invoice_share'
+migrations_paths:
+  KimaiPlugin\InvoiceShareBundle\Migrations: 'var/plugins/InvoiceShareBundle/Migrations'
+custom_template: 'migrations/MigrationTemplate.txt'

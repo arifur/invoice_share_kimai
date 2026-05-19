@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    KimaiPlugin\InvoiceShareBundle\:
+        resource: '../../*'
+        exclude:
+            - '../../Entity/'
+            - '../../Migrations/'
+            - '../../Resources/'
+
+    KimaiPlugin\InvoiceShareBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+
+    KimaiPlugin\InvoiceShareBundle\Repository\InvoiceShareRepository:
+        class:     Doctrine\ORM\EntityRepository
+        factory:   ['@doctrine.orm.entity_manager', getRepository]
+        arguments: ['KimaiPlugin\InvoiceShareBundle\Entity\InvoiceShare']
