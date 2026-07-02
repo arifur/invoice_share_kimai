@@ -53,6 +53,17 @@
         .status-pending { background: #fff3cd; color: #856404; }
         .status-paid { background: #d4edda; color: #155724; }
         .status-canceled { background: #e2e3e5; color: #383d41; }
+        .paid-banner {
+            margin: 0 0 24px 0;
+            padding: 12px 20px;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+        }
         .total {
             text-align: right;
             font-size: 20px;
@@ -75,9 +86,18 @@
                 <div>{{ invoice.invoiceNumber }}</div>
             </div>
             <div>
-                <span class="status status-{{ invoice.status }}">{{ invoice.status|upper }}</span>
+                {% if not invoice.isPaid %}
+                    <span class="status status-{{ invoice.status }}">{{ invoice.status|upper }}</span>
+                {% endif %}
             </div>
         </div>
+
+        {% if invoice.isPaid %}
+        <div class="paid-banner">
+            This invoice has been paid in full
+            {%- if invoice.paymentDate %} on {{ invoice.paymentDate|date('Y-m-d') }}{% endif %}.
+        </div>
+        {% endif %}
 
         <div class="invoice-details">
             <table>
@@ -97,6 +117,12 @@
                     <td>Due Date</td>
                     <td>{{ invoice.dueDate|date('Y-m-d') }}</td>
                 </tr>
+                {% if invoice.isPaid %}
+                <tr>
+                    <td>Status</td>
+                    <td>Paid{% if invoice.paymentDate %} ({{ invoice.paymentDate|date('Y-m-d') }}){% endif %}</td>
+                </tr>
+                {% endif %}
                 {% if invoice.paymentDate %}
                 <tr>
                     <td>Payment Date</td>
@@ -124,8 +150,8 @@
         {% endif %}
 
         <div class="footer">
-            {% if invoicePublic.endDate %}
-                Link valid until {{ invoicePublic.endDate|date('Y-m-d') }}
+            {% if invoiceShare.endDate %}
+                Link valid until {{ invoiceShare.endDate|date('Y-m-d') }}
             {% endif %}
         </div>
     </div>
